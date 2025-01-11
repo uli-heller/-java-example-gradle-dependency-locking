@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.+'
+        id 'nebula.dependency-lock' version '12.7.1'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -10,6 +11,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 dependencyLocking {
+    //lockMode = LockMode.LENIENT
     lockAllConfigurations()
 }
 
