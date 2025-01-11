@@ -1,10 +1,22 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.netflix.nebula:gradle-dependency-lock-plugin:15.+'
+    }
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.+'
-        id 'nebula.dependency-lock' version '12.7.1'
+        //id 'nebula.dependency-lock' version '12.7.1'
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.netflix.nebula.dependency-lock'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
