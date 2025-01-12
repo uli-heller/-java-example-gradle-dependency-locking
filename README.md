@@ -59,3 +59,15 @@ Execution failed for task ':compileJava'.
 BUILD FAILED in 533ms
 1 actionable task: 1 executed
 ```
+
+Note: I compared the lock files created by
+
+- `./gradlew dependencies --write-locks -PspringBootVersion='3.4.1' (3.4.1 is the most current version at the moment)
+- `./gradlew dependencies --write-locks -PspringBootVersion='3.+' (3.+ is my pattern to use the most current version)
+
+The lock files are identical. So I assume that
+
+- `./gradlew dependencies --write-locks -PspringBootVersion='3.+' (executed a couple of months ago when 3.2.1 was the most current version)
+- `./gradlew dependencies --write-locks -PspringBootVersion='3.2.1' (executed now)
+
+produce identical lock files, too!
