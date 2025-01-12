@@ -11,6 +11,8 @@ Problems
 
 ### Updated Dependencies
 
+#### Problem Description
+
 See [discuss.gradle.org - Subproject downloads dependencies higher version than in lockfiles](https://discuss.gradle.org/t/subproject-downloads-dependencies-higher-version-than-in-lockfiles)
 for more help. Please note that I do not use subprojects!
 
@@ -71,3 +73,51 @@ The lock files are identical. So I assume that
 - `./gradlew dependencies --write-locks -PspringBootVersion='3.2.1' (executed now)
 
 produce identical lock files, too!
+
+#### Solution
+
+Thanks to [discuss.gradle.org - Subproject downloads dependencies higher version than in lockfiles](https://discuss.gradle.org/t/subproject-downloads-dependencies-higher-version-than-in-lockfiles)
+and Björn Kautler, I finally got a good understanding of the problem and two
+possible solutions.
+
+The problem is the plugin version. It is not locked,
+so when a new version of the plugin is available, I do get
+new BOM_COORDINATES and they do not match the locked versions
+any more.
+
+Possible solutions:
+
+- Avoid using "SpringBootPlugin.BOM_COORDINATES"
+
+  ```diff
+  --------------------------------- build.gradle ---------------------------------
+  index ddc7b75..bdb8d78 100644
+  @@ -20,6 +20,6 @@ repositories {
+   }
+ 
+   dependencies {
+  -    implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+  +    implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+       implementation 'org.springframework.boot:spring-boot-starter-web'
+   }
+  ```
+
+- Lock plugin versions
+
+  ```diff
+  --------------------------------- build.gradle ---------------------------------
+  index ddc7b75..fea4dd4 100644
+  @@ -1,3 +1,9 @@
+  +buildscript {
+  +    configurations.classpath {
+  +        resolutionStrategy.activateDependencyLocking()
+  +    }
+  +}
+  +
+   plugins {
+       id 'java'
+       id 'org.springframework.boot' version "${springBootVersion}"
+  ```
+
+Both solutions do work.
+Thanks a lot to Björn Kautler and the gradle forum!
