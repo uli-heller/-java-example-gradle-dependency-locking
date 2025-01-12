@@ -6,8 +6,8 @@ buildscript {
 }
 
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version "${springBootVersion}"
+        id 'java'
+        id 'org.springframework.boot' version "${springBootVersion}"
 }
 
 group = 'com.example'
@@ -23,10 +23,10 @@ dependencyLocking {
 }
 
 repositories {
-	mavenCentral()
+        mavenCentral()
 }
 
 dependencies {
-	implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+        implementation 'org.springframework.boot:spring-boot-starter-web'
 }
