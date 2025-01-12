@@ -1,5 +1,6 @@
 buildscript {
     configurations.classpath {
+        // Lock plugin versions
         resolutionStrategy.activateDependencyLocking()
     }
 }
