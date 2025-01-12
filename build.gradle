@@ -28,5 +28,7 @@ repositories {
 
 dependencies {
         implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+        // Alternative to locking plugin versions: Do not use SpringBootPlugin.BOM_COORDINATES
+        // implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
         implementation 'org.springframework.boot:spring-boot-starter-web'
 }
